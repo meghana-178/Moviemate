@@ -121,7 +121,7 @@ export const movies: Movie[] = [
       poster: "https://imgs.search.brave.com/uO1phBtBLKb-pQbeqW-REgwUvFPhgLyTG32crQ1QRN8/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pLnBp/bmltZy5jb20vb3Jp/Z2luYWxzLzY1LzNi/L2Q1LzY1M2JkNWE4/NmYwYjY0OGI3YTA3/YTM3OGJmYWQwY2M0/LmpwZw"
   },
   {
-      id: 24, title: "La La Land", genre: "Romance", year: 2016, rating: 8.0,
+      id: 24, title: "La La Land", genre: "Comedy", year: 2016, rating: 8.0,
       poster: "https://imgs.search.brave.com/qwLS12rbXvI1l-wzTwDGLFUQhs-hdCVbYQ2fZqZmjFY/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pLnBp/bmltZy5jb20vb3Jp/Z2luYWxzL2FhLzFl/LzdkL2FhMWU3ZDNk/YTAwNTNmYzY3Y2Qy/ZmJjNjA4MTc0N2Ux/LmpwZw"
   },
   {
