@@ -4,7 +4,7 @@ export interface Movie {
   genre: string;
   year: number;
   rating: number;
-  poster?: string;
+  poster: string;
 }
 
 interface GenreTheme {
