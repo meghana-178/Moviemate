@@ -1,5 +1,6 @@
 import { Search, X } from "lucide-react";
 import type { Dispatch, SetStateAction } from "react";
+import { GENRES } from "../data/movies";
 
 export type Tab = "home" | "watchlist";
 
@@ -8,9 +9,18 @@ interface NavbarProps {
   setTab: Dispatch<SetStateAction<Tab>>;
   query: string;
   setQuery: Dispatch<SetStateAction<string>>;
+  selectedGenre: string;
+  setSelectedGenre: Dispatch<SetStateAction<string>>;
 }
 
-export default function Navbar({ tab, setTab, query, setQuery }: NavbarProps) {
+ export default function Navbar({
+  tab,
+  setTab,
+  query,
+  setQuery,
+  selectedGenre,
+  setSelectedGenre
+}: NavbarProps) {
   return (
     <header className="navbar">
       <div className="navbar-left">
@@ -45,6 +55,17 @@ export default function Navbar({ tab, setTab, query, setQuery }: NavbarProps) {
           </button>
         )}
       </div>
+      <select
+  value={selectedGenre}
+  onChange={(e) => setSelectedGenre(e.target.value)}
+  className="genre-select"
+>
+  {GENRES.map((genre) => (
+    <option key={genre} value={genre}>
+      {genre}
+    </option>
+  ))}
+</select>
     </header>
   );
 }

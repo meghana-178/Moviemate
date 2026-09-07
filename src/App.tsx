@@ -9,7 +9,8 @@ import EmptyState from "./components/EmptyState";
 export default function App() {
   const [tab, setTab] = useState<Tab>("home");
   const [query, setQuery] = useState("");
-  const [watchlist, setWatchlist] = useState<Set<number>>(() => new Set([1, 5, 12]));
+  const [selectedGenre, setSelectedGenre] = useState("All");
+  const [watchlist, setWatchlist] = useState<Set<number>>(() => new Set());
 
   const toggleSave = (id: number) => {
     setWatchlist((prev) => {
@@ -19,10 +20,16 @@ export default function App() {
     });
   };
 
-  const featured: Movie = useMemo(
-    () => MOVIES.reduce((best, m) => (m.rating > best.rating ? m : best), MOVIES[0]),
-    [query,watchlist]
-  );
+  const [featured, setFeatured] = useState<Movie>(() =>
+  MOVIES.reduce(
+    (best, m) => (m.rating > best.rating ? m : best),
+    MOVIES[0]
+  )
+);
+
+  const selectMovie = (movie: Movie) => {
+  setFeatured(movie);
+};
 
   const trending: Movie[] = useMemo(
     () => [...MOVIES].sort((a, b) => b.rating - a.rating).slice(0, 8),
@@ -37,11 +44,19 @@ export default function App() {
     return groups;
   }, []);
 
-  const searchResults: Movie[] = useMemo(() => {
-    const q = query.trim().toLowerCase();
-    if (!q) return [];
-    return MOVIES.filter((m) => m.title.toLowerCase().includes(q));
-  }, [query]);
+  const filteredMovies = useMemo(() => {
+  if (selectedGenre === "All") return MOVIES;
+
+  return MOVIES.filter((movie) => movie.genre === selectedGenre);
+}, [selectedGenre]);
+
+ const searchResults: Movie[] = useMemo(() => {
+  const q = query.trim().toLowerCase();
+
+  return filteredMovies.filter((movie) =>
+    movie.title.toLowerCase().includes(q)
+  );
+}, [query, filteredMovies]);
 
   const savedMovies: Movie[] = useMemo(
     () => MOVIES.filter((m) => watchlist.has(m.id)),
@@ -52,7 +67,14 @@ export default function App() {
 
   return (
     <div className="app">
-      <Navbar tab={tab} setTab={setTab} query={query} setQuery={setQuery} />
+      <Navbar
+  tab={tab}
+  setTab={setTab}
+  query={query}
+  setQuery={setQuery}
+  selectedGenre={selectedGenre}
+  setSelectedGenre={setSelectedGenre}
+/>
 
       <main className="main">
         {tab === "home" && (
@@ -65,6 +87,7 @@ export default function App() {
                     movies={searchResults}
                     watchlist={watchlist}
                     onToggle={toggleSave}
+                    onSelect={selectMovie}
                   />
                 </div>
               ) : (
@@ -80,9 +103,14 @@ export default function App() {
               <>
                 <Hero movie={featured} saved={watchlist.has(featured.id)} onToggle={toggleSave} />
                 <div className="rows">
-                  <Row title="Trending Now" movies={trending} watchlist={watchlist} onToggle={toggleSave} />
+                  <Row title="Trending Now" 
+                  movies={trending} 
+                  watchlist={watchlist} 
+                  onToggle={toggleSave}
+                  onSelect={selectMovie}
+                  />
                   {Object.entries(rowsByGenre).map(([genre, movies]) => (
-                    <Row key={genre} title={genre} movies={movies} watchlist={watchlist} onToggle={toggleSave} />
+                    <Row key={genre} title={genre} movies={movies} watchlist={watchlist} onToggle={toggleSave} onSelect={selectMovie} />
                   ))}
                 </div>
               </>
@@ -93,7 +121,7 @@ export default function App() {
         {tab === "watchlist" && (
           <div className="rows watchlist-page">
             {savedMovies.length > 0 ? (
-              <Row title="My List" movies={savedMovies} watchlist={watchlist} onToggle={toggleSave} />
+              <Row title="My List" movies={savedMovies} watchlist={watchlist} onToggle={toggleSave} onSelect={selectMovie} />
             ) : (
               <EmptyState
                 icon={<Heart size={22} />}

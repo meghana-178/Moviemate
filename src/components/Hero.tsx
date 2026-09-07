@@ -12,9 +12,13 @@ export default function Hero({ movie, saved, onToggle }: HeroProps) {
 console.log(movie);
   return (
     <div
-      className="hero"
-      style={{ background: `linear-gradient(120deg, ${theme.from}, #0a0a0a 75%)` }}
-    >
+  className="hero"
+  style={{
+    backgroundImage: `linear-gradient(90deg, ${theme.from} 0%, rgba(10,10,10,0.8) 45%, rgba(10,10,10,0.3) 100%), url(${movie.poster})`,
+    backgroundSize: "cover",
+    backgroundPosition: "center",
+  }}
+>
       <div className="hero-fade" />
       <div className="hero-content">
         <span className="hero-tag">Featured</span>
