@@ -21,7 +21,7 @@ export default function App() {
 
   const featured: Movie = useMemo(
     () => MOVIES.reduce((best, m) => (m.rating > best.rating ? m : best), MOVIES[0]),
-    []
+    [query,watchlist]
   );
 
   const trending: Movie[] = useMemo(

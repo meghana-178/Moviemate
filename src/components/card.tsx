@@ -16,6 +16,7 @@ export default function Card({ movie, saved, onToggle }: CardProps) {
         className="card-poster"
         style={{ background: `linear-gradient(165deg, ${theme.from}, ${theme.to})` }}
       >
+        <img src={movie.poster} alt={movie.title} />
         <span className="card-letter">{movie.title.charAt(0)}</span>
 
         <button

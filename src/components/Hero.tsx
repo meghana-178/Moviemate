@@ -9,7 +9,7 @@ interface HeroProps {
 
 export default function Hero({ movie, saved, onToggle }: HeroProps) {
   const theme = GENRE_THEME[movie.genre] || GENRE_THEME["Drama"];
-
+console.log(movie);
   return (
     <div
       className="hero"
