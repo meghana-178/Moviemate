@@ -52,7 +52,6 @@ getWatchlist()
     console.error("Error fetching watchlist:", error);
   });
 }, []);
-
   // Add or remove movie from watchlist
   const toggleSave = async (id: number) => {
   try {
