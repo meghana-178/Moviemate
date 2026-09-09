@@ -201,18 +201,6 @@
       "poster": "https://imgs.search.brave.com/VXa3iZwbIuvjQ0Qb4YBd8q7-G9havo4bM9k3pqj72BI/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pLnBp/bmltZy5jb20vb3Jp/Z2luYWxzL2Q1LzM3/Lzk3L2Q1Mzc5Nzg3/MzAzZjRmOGVjNDJk/M2E4YzQ1NTQ4MTQz/LmpwZw"
     }
   ],
-  "watchlist": [
-    {
-      "movieId": "1",
-      "id": "djVCCLbAzcM"
-    },
-    {
-      "movieId": "2",
-      "id": "lRW5h_3rGUk"
-    },
-    {
-      "movieId": "8",
-      "id": "Zb-cIRuljwY"
-    }
-  ]
+  "watchlist": [],
+  "$schema": "./node_modules/json-server/schema.json"
 }
